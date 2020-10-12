@@ -11,23 +11,25 @@
         android:layout_width="40dp"
         android:layout_height="57dp"
         android:layout_marginStart="50dp"
+        android:layout_marginBottom="120dp"
+        android:autofillHints="0.0"
         android:ems="10"
+        android:hint="0.0"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/first_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="LabelFor,MissingConstraints"
-        android:autofillHints="0.0" />
+        tools:ignore="LabelFor,MissingConstraints" />
 
     <TextView
         android:id="@+id/first_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="120dp"
         android:text="@string/x_squared"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/second_input"
         app:layout_constraintStart_toEndOf="@+id/first_input"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,23 +37,26 @@
         android:id="@+id/second_input"
         android:layout_width="40dp"
         android:layout_height="57dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="120dp"
+        android:autofillHints="0.0"
         android:ems="10"
+        android:hint="0.0"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/second_text"
         app:layout_constraintStart_toEndOf="@+id/first_text"
-        tools:ignore="LabelFor,MissingConstraints"
-        android:autofillHints="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="LabelFor,MissingConstraints" />
 
     <TextView
         android:id="@+id/second_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="120dp"
         android:text="@string/x"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/third_input"
         app:layout_constraintStart_toEndOf="@+id/second_input"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,20 +64,23 @@
         android:id="@+id/third_input"
         android:layout_width="40dp"
         android:layout_height="57dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="120dp"
+        android:autofillHints="0.0"
         android:ems="10"
+        android:hint="0.0"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/third_text"
         app:layout_constraintStart_toEndOf="@+id/second_text"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="LabelFor,MissingConstraints"
-        android:autofillHints="0.0" />
+        tools:ignore="LabelFor,MissingConstraints" />
 
     <TextView
         android:id="@+id/third_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
+        android:layout_marginBottom="120dp"
         android:text="@string/equal_to_zero"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -84,9 +92,8 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
         android:text="@string/compute"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/output"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/second_input" />
@@ -96,10 +103,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="110dp"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
