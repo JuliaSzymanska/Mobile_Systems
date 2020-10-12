@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,10 +31,14 @@ public class MainActivity extends AppCompatActivity {
             EditText firstInput = (EditText) findViewById(R.id.first_input);
             EditText secondInput = (EditText) findViewById(R.id.second_input);
             EditText thirdInput = (EditText) findViewById(R.id.third_input);
-            firstInputDouble = Double.parseDouble(firstInput.getText().toString());
-            secondInputDouble = Double.parseDouble(secondInput.getText().toString());
-            thirdInputDouble = Double.parseDouble(thirdInput.getText().toString());
-            calculateRoots();
+            try {
+                firstInputDouble = Double.parseDouble(firstInput.getText().toString());
+                secondInputDouble = Double.parseDouble(secondInput.getText().toString());
+                thirdInputDouble = Double.parseDouble(thirdInput.getText().toString());
+                calculateRoots();
+            } catch(NumberFormatException e){
+                Toast.makeText(MainActivity.this, "Enter only numbers!", Toast.LENGTH_SHORT).show();
+            }
         }
     };
 
