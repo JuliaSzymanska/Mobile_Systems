@@ -10,8 +10,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+
 public class MainActivity extends AppCompatActivity {
 
+    private static DecimalFormat decimalFormat = new DecimalFormat("#.###");
     private double firstInputDouble;
     private double secondInputDouble;
     private double thirdInputDouble;
@@ -36,40 +39,41 @@ public class MainActivity extends AppCompatActivity {
                 secondInputDouble = Double.parseDouble(secondInput.getText().toString());
                 thirdInputDouble = Double.parseDouble(thirdInput.getText().toString());
                 calculateRoots();
-            } catch(NumberFormatException e){
+            } catch (NumberFormatException e) {
                 Toast.makeText(MainActivity.this, "Enter only numbers!", Toast.LENGTH_SHORT).show();
             }
+
         }
     };
 
-    private Double calculateDelta(){
+    private Double calculateDelta() {
         return secondInputDouble * secondInputDouble - 4 * firstInputDouble * thirdInputDouble;
     }
 
-    private double calculateRoot(int minus, double delta){
-        return  (-1 * secondInputDouble + minus * Math.sqrt(delta)) / 2 * firstInputDouble;
+    private double calculateRoot(int minus, double delta) {
+        return (-1 * secondInputDouble + minus * Math.sqrt(delta)) / 2 * firstInputDouble;
     }
 
     @SuppressLint("SetTextI18n")
-    private void calculateRoots(){
+    private void calculateRoots() {
         TextView output = (TextView) findViewById(R.id.output);
-        if(firstInputDouble == 0.0 ) {
+        if (firstInputDouble == 0.0) {
             output.setText("It is not a quadratic equation.");
             return;
         }
         double delta = calculateDelta();
-        if(delta < 0.0) {
-            output.setText("The quadratic equation hasn't any roots. " + ". The square discriminant equals " + delta);
+        if (delta < 0.0) {
+            output.setText("The quadratic equation hasn't any roots. " + "The square discriminant equals " + decimalFormat.format(delta));
             return;
         }
         if (delta == 0) {
             double first_root = calculateRoot(0, delta);
-            output.setText("The quadratic equation has one root equals " + first_root + ". The square discriminant equals " + delta);
+            output.setText("The quadratic equation has one root equals " + decimalFormat.format(first_root) + ". The square discriminant equals " + decimalFormat.format(delta));
             return;
         }
         double first_root = calculateRoot(1, delta);
         double second_root = calculateRoot(-1, delta);
-        output.setText("The quadratic equation has two roots. First equals " + first_root + ", second equals " + second_root + ". The square discriminant equals " + delta);
+        output.setText("The quadratic equation has two roots. First equals " + decimalFormat.format(first_root) + ", second equals " + decimalFormat.format(second_root) + ". The square discriminant equals " + decimalFormat.format(delta));
         return;
     }
 }
