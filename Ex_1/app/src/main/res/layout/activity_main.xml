@@ -12,12 +12,13 @@
         android:layout_height="57dp"
         android:layout_marginStart="50dp"
         android:ems="10"
-        android:inputType="phone"
+        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/first_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="LabelFor,MissingConstraints"
+        android:autofillHints="0.0" />
 
     <TextView
         android:id="@+id/first_text"
@@ -28,20 +29,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/second_input"
         app:layout_constraintStart_toEndOf="@+id/first_input"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="376dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/second_input"
         android:layout_width="40dp"
         android:layout_height="57dp"
         android:ems="10"
-        android:inputType="phone"
+        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/second_text"
         app:layout_constraintStart_toEndOf="@+id/first_text"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="LabelFor,MissingConstraints"
+        android:autofillHints="0.0" />
 
     <TextView
         android:id="@+id/second_text"
@@ -59,12 +60,13 @@
         android:layout_width="40dp"
         android:layout_height="57dp"
         android:ems="10"
-        android:inputType="phone"
+        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/third_text"
         app:layout_constraintStart_toEndOf="@+id/second_text"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="LabelFor,MissingConstraints"
+        android:autofillHints="0.0" />
 
     <TextView
         android:id="@+id/third_text"
@@ -93,6 +95,7 @@
         android:id="@+id/output"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
