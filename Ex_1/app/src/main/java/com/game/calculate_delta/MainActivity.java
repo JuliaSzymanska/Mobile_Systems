@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 thirdInputDouble = Double.parseDouble(thirdInput.getText().toString());
                 calculateRoots();
             } catch (NumberFormatException e) {
-                Toast.makeText(MainActivity.this, "Enter only numbers!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, getString(R.string.enter_numbers), Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -58,22 +58,21 @@ public class MainActivity extends AppCompatActivity {
     private void calculateRoots() {
         TextView output = (TextView) findViewById(R.id.output);
         if (firstInputDouble == 0.0) {
-            output.setText("It is not a quadratic equation.");
+            output.setText(getString(R.string.not_quadratic));
             return;
         }
         double delta = calculateDelta();
         if (delta < 0.0) {
-            output.setText("The quadratic equation hasn't any roots. " + "The square discriminant equals " + decimalFormat.format(delta));
+            output.setText(getString(R.string.has_no_root) + getString(R.string.discriminant) + decimalFormat.format(delta));
             return;
         }
         if (delta == 0) {
             double first_root = calculateRoot(0, delta);
-            output.setText("The quadratic equation has one root equals " + decimalFormat.format(first_root) + ". The square discriminant equals " + decimalFormat.format(delta));
+            output.setText(getString(R.string.root) + decimalFormat.format(first_root) + getString(R.string.discriminant) + decimalFormat.format(delta));
             return;
         }
         double first_root = calculateRoot(1, delta);
         double second_root = calculateRoot(-1, delta);
-        output.setText("The quadratic equation has two roots. First equals " + decimalFormat.format(first_root) + ", second equals " + decimalFormat.format(second_root) + ". The square discriminant equals " + decimalFormat.format(delta));
-        return;
+        output.setText(getString(R.string.first_root) + decimalFormat.format(first_root) + getString(R.string.second_root) + decimalFormat.format(second_root) + getString(R.string.discriminant) + decimalFormat.format(delta));
     }
 }

@@ -5,4 +5,12 @@
     <string name="equal_to_zero">= 0</string>
     <string name="compute">Compute</string>
     <string name="_0_0">0.0</string>
+    <string name="enter_numbers">Enter only numbers!</string>
+    <string name="not_quadratic">It is not a quadratic equation.</string>
+    <string name="has_no_root">The quadratic equation has not any roots. </string>
+    <string name="discriminant">The square discriminant equals </string>
+    <string name="root">The quadratic equation has one root equals </string>
+    <string name="first_root">The quadratic equation has two roots. First equals </string>
+    <string name="second_root">, second equals </string>
+
 </resources>
