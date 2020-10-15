@@ -15,9 +15,9 @@ import java.text.DecimalFormat;
 public class MainActivity extends AppCompatActivity {
 
     private static DecimalFormat decimalFormat = new DecimalFormat("#.###");
-    private double firstInputDouble;
-    private double secondInputDouble;
-    private double thirdInputDouble;
+    private int firstInputInt;
+    private int secondInputInt;
+    private int thirdInputInt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
             EditText secondInput = (EditText) findViewById(R.id.second_input);
             EditText thirdInput = (EditText) findViewById(R.id.third_input);
             try {
-                firstInputDouble = Double.parseDouble(firstInput.getText().toString());
-                secondInputDouble = Double.parseDouble(secondInput.getText().toString());
-                thirdInputDouble = Double.parseDouble(thirdInput.getText().toString());
+                firstInputInt = Integer.parseInt(firstInput.getText().toString());
+                secondInputInt = Integer.parseInt(secondInput.getText().toString());
+                thirdInputInt = Integer.parseInt(thirdInput.getText().toString());
                 calculateRoots();
             } catch (NumberFormatException e) {
                 Toast.makeText(MainActivity.this, getString(R.string.enter_numbers), Toast.LENGTH_SHORT).show();
@@ -46,18 +46,18 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private Double calculateDelta() {
-        return secondInputDouble * secondInputDouble - 4 * firstInputDouble * thirdInputDouble;
+    private int calculateDelta() {
+        return secondInputInt * secondInputInt - 4 * firstInputInt * thirdInputInt;
     }
 
     private double calculateRoot(int minus, double delta) {
-        return (-1 * secondInputDouble + minus * Math.sqrt(delta)) / 2 * firstInputDouble;
+        return (-1 * secondInputInt + minus * Math.sqrt(delta)) / 2 * firstInputInt;
     }
 
     @SuppressLint("SetTextI18n")
     private void calculateRoots() {
         TextView output = (TextView) findViewById(R.id.output);
-        if (firstInputDouble == 0.0) {
+        if (firstInputInt == 0.0) {
             output.setText(getString(R.string.not_quadratic));
             return;
         }

@@ -14,12 +14,11 @@
         android:layout_marginBottom="120dp"
         android:autofillHints="0.0"
         android:ems="10"
-        android:hint="@string/_0_0"
+        android:hint="@string/_0"
         android:inputType="numberSigned"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="LabelFor,MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/first_text"
@@ -41,7 +40,7 @@
         android:layout_marginBottom="120dp"
         android:autofillHints="0.0"
         android:ems="10"
-        android:hint="@string/_0_0"
+        android:hint="@string/_0"
         android:inputType="numberSigned"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/first_text"
@@ -68,12 +67,11 @@
         android:layout_marginBottom="120dp"
         android:autofillHints="0.0"
         android:ems="10"
-        android:hint="@string/_0_0"
+        android:hint="@string/_0"
         android:inputType="numberSigned"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/second_text"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="LabelFor,MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/third_text"
