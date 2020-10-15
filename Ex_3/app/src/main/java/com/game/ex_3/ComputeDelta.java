@@ -1,4 +1,4 @@
-package com.game.calculate_delta;
+package com.game.ex_3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,8 +12,7 @@ import android.widget.Toast;
 
 import java.text.DecimalFormat;
 
-public class MainActivity extends AppCompatActivity {
-
+public class ComputeDelta extends AppCompatActivity {
     private static DecimalFormat decimalFormat = new DecimalFormat("#.###");
     private int firstInputInt;
     private int secondInputInt;
@@ -22,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_compute_delta);
         Button computeButton = (Button) findViewById(R.id.button);
         computeButton.setOnClickListener(computeButtonListener);
 
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 thirdInputInt = Integer.parseInt(thirdInput.getText().toString());
                 calculateRoots();
             } catch (NumberFormatException e) {
-                Toast.makeText(MainActivity.this, getString(R.string.enter_numbers), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ComputeDelta.this, getString(R.string.enter_numbers), Toast.LENGTH_SHORT).show();
             }
 
         }

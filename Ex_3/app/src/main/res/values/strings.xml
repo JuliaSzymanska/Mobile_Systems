@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Ex_3</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="google">GOOGLE</string>
+    <string name="phone">PHONE</string>
+    <string name="map">MAP</string>
+    <string name="compute_delta">COMPUTE DELTA</string>
+    <string name="second_activity">SECOND ACTIVITY</string>
+    <string name="x_squared">x^2 +</string>
+    <string name="x">x +</string>
+    <string name="equal_to_zero">= 0</string>
+    <string name="compute">Compute</string>
+    <string name="_0">0</string>
+    <string name="enter_numbers">"Enter only numbers!"</string>
+    <string name="not_quadratic">"It is not a quadratic equation. "</string>
+    <string name="has_no_root">"The quadratic equation has not any roots. "</string>
+    <string name="discriminant">". The square discriminant equals "</string>
+    <string name="root">"The quadratic equation has one root equals "</string>
+    <string name="first_root">"The quadratic equation has two roots. First equals "</string>
+    <string name="second_root">" , second equals "</string>
+</resources>
