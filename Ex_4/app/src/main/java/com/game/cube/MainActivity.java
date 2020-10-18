@@ -7,9 +7,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ImageView;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -18,7 +17,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private static int SHAKE_THRESHOLD = 3;
-    List<TextView> textViews;
+    List<ImageView> imageViews;
     private int numberOfCubes;
 
     @Override
@@ -26,10 +25,10 @@ public class MainActivity extends Activity implements SensorEventListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         numberOfCubes = 1;
-        textViews = new ArrayList<>();
-        textViews.add((TextView) findViewById(R.id.first_cube));
-        textViews.add((TextView) findViewById(R.id.second_cube));
-        textViews.add((TextView) findViewById(R.id.third_cube));
+        imageViews = new ArrayList<>();
+        imageViews.add((ImageView) findViewById(R.id.first_cube));
+        imageViews.add((ImageView) findViewById(R.id.second_cube));
+        imageViews.add((ImageView) findViewById(R.id.third_cube));
         mSensorManager =
                 (SensorManager) getSystemService(SENSOR_SERVICE);
         mAccelerometer =
@@ -39,14 +38,33 @@ public class MainActivity extends Activity implements SensorEventListener {
     private void generateRandomNumber() {
         Random randomGenerator = new Random();
         int randomNum;
-        for(int i = 0; i < textViews.size(); i++){
-            textViews.get(i).setText("");
+        for (int i = 0; i < imageViews.size(); i++) {
+            imageViews.get(i).setBackgroundResource(android.R.color.transparent);
         }
-        System.out.println(textViews.size());
-        if (textViews.size() >= numberOfCubes) {
+        System.out.println(imageViews.size());
+        if (imageViews.size() >= numberOfCubes) {
             for (int i = 0; i < numberOfCubes; i++) {
                 randomNum = randomGenerator.nextInt(6) + 1;
-                textViews.get(i).setText(Integer.toString(randomNum));
+                switch (randomNum) {
+                    case 1:
+                        imageViews.get(i).setBackgroundResource(R.drawable.one);
+                        break;
+                    case 2:
+                        imageViews.get(i).setBackgroundResource(R.drawable.two);
+                        break;
+                    case 3:
+                        imageViews.get(i).setBackgroundResource(R.drawable.three);
+                        break;
+                    case 4:
+                        imageViews.get(i).setBackgroundResource(R.drawable.four);
+                        break;
+                    case 5:
+                        imageViews.get(i).setBackgroundResource(R.drawable.five);
+                        break;
+                    case 6:
+                        imageViews.get(i).setBackgroundResource(R.drawable.six);
+                        break;
+                }
             }
         }
     }
