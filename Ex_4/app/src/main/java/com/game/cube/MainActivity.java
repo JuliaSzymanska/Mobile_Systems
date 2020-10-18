@@ -16,7 +16,7 @@ import java.util.Random;
 public class MainActivity extends Activity implements SensorEventListener {
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
-    private static int SHAKE_THRESHOLD = 3;
+    private static final int SHAKE_THRESHOLD = 3;
     List<ImageView> imageViews;
     private int numberOfCubes;
 
@@ -41,7 +41,7 @@ public class MainActivity extends Activity implements SensorEventListener {
         for (int i = 0; i < imageViews.size(); i++) {
             imageViews.get(i).setBackgroundResource(android.R.color.transparent);
         }
-        System.out.println(imageViews.size());
+
         if (imageViews.size() >= numberOfCubes) {
             for (int i = 0; i < numberOfCubes; i++) {
                 randomNum = randomGenerator.nextInt(6) + 1;
@@ -89,15 +89,16 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        float x = event.values[0];
-        float y = event.values[1];
-        float z = event.values[2];
-        float acceleration = (float) Math.sqrt(x * x + y * y + z * z) -
-                SensorManager.GRAVITY_EARTH;
-        if (acceleration > SHAKE_THRESHOLD) {
-            generateRandomNumber();
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            float x = event.values[0];
+            float y = event.values[1];
+            float z = event.values[2];
+            float acceleration = (float) Math.sqrt(x * x + y * y + z * z) -
+                    SensorManager.GRAVITY_EARTH;
+            if (acceleration > SHAKE_THRESHOLD) {
+                generateRandomNumber();
+            }
         }
-
     }
 
     @Override
