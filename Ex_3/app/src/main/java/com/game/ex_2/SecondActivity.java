@@ -1,4 +1,4 @@
-package com.game.ex_3;
+package com.game.ex_2;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,4 +1,4 @@
-package com.game.ex_3;
+package com.game.ex_2;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,23 +15,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button secondActivityBtn = (Button) findViewById(R.id.secondActivityBtn);
+        Button secondActivityBtn = findViewById(R.id.secondActivityBtn);
         secondActivityBtn.setOnClickListener(secondActivityBtnListener);
 
-        Button googleBtn = (Button) findViewById(R.id.googleBtn);
+        Button googleBtn = findViewById(R.id.googleBtn);
         googleBtn.setOnClickListener(googleBtnListener);
 
-        Button mapBtn = (Button) findViewById(R.id.mapBtn);
+        Button mapBtn = findViewById(R.id.mapBtn);
         mapBtn.setOnClickListener(mapBtnListener);
 
-        Button phoneBtn = (Button) findViewById(R.id.phoneBtn);
+        Button phoneBtn = findViewById(R.id.phoneBtn);
         phoneBtn.setOnClickListener(phoneBtnListener);
 
-        Button computeDeltaBtn = (Button) findViewById(R.id.computeDelta);
+        Button computeDeltaBtn = findViewById(R.id.computeDelta);
         computeDeltaBtn.setOnClickListener(computeDeltaBtnListener);
     }
 
-    private View.OnClickListener secondActivityBtnListener = new View.OnClickListener() {
+    private final View.OnClickListener secondActivityBtnListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent startIntend = new Intent(getApplicationContext(), SecondActivity.class);
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private View.OnClickListener googleBtnListener = new View.OnClickListener() {
+    private final View.OnClickListener googleBtnListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             String google = "http://www.google.com";
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private View.OnClickListener mapBtnListener = new View.OnClickListener() {
+    private final View.OnClickListener mapBtnListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Uri location = Uri.parse("geo:37.422219,-122.08364?z=14");
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private View.OnClickListener phoneBtnListener = new View.OnClickListener() {
+    private final View.OnClickListener phoneBtnListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Uri number = Uri.parse("tel:5551234");
@@ -73,11 +73,13 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private View.OnClickListener computeDeltaBtnListener = new View.OnClickListener() {
+    private final View.OnClickListener computeDeltaBtnListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent startIntend = new Intent(getApplicationContext(), ComputeDelta.class);
-            startActivity(startIntend);
+            Intent intent = getPackageManager().getLaunchIntentForPackage("com.game.calculate_delta");
+            if (intent != null) {
+                startActivity(intent);
+            }
         }
     };
 
