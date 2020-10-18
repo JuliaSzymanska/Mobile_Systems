@@ -6,26 +6,30 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends Activity implements SensorEventListener {
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private static int SHAKE_THRESHOLD = 3;
-    private TextView firstCube;
-    private TextView secondCube;
-    private TextView thirdCube;
+    List<TextView> textViews;
     private int numberOfCubes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        firstCube = (TextView) findViewById(R.id.first_cube);
-        secondCube = (TextView) findViewById(R.id.second_cube);
-        thirdCube = (TextView) findViewById(R.id.third_cube);
+        numberOfCubes = 1;
+        textViews = new ArrayList<>();
+        textViews.add((TextView) findViewById(R.id.first_cube));
+        textViews.add((TextView) findViewById(R.id.second_cube));
+        textViews.add((TextView) findViewById(R.id.third_cube));
         mSensorManager =
                 (SensorManager) getSystemService(SENSOR_SERVICE);
         mAccelerometer =
@@ -34,8 +38,17 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     private void generateRandomNumber() {
         Random randomGenerator = new Random();
-        int randomNum = randomGenerator.nextInt(6) + 1;
-        firstCube.setText(Integer.toString(randomNum));
+        int randomNum;
+        for(int i = 0; i < textViews.size(); i++){
+            textViews.get(i).setText("");
+        }
+        System.out.println(textViews.size());
+        if (textViews.size() >= numberOfCubes) {
+            for (int i = 0; i < numberOfCubes; i++) {
+                randomNum = randomGenerator.nextInt(6) + 1;
+                textViews.get(i).setText(Integer.toString(randomNum));
+            }
+        }
     }
 
     @Override
@@ -74,15 +87,15 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     }
 
-    public void oneButtonListener(){
+    public void oneButtonListener(View v) {
         numberOfCubes = 1;
     }
 
-    public void twoButtonListener(){
+    public void twoButtonListener(View v) {
         numberOfCubes = 2;
     }
 
-    public void threeButtonListener(){
+    public void threeButtonListener(View v) {
         numberOfCubes = 3;
     }
 
