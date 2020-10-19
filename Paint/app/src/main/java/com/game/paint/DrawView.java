@@ -11,6 +11,7 @@ import android.graphics.MaskFilter;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,10 +48,10 @@ public class DrawView extends View implements View.OnTouchListener {
         setFocusable(true);
         setFocusableInTouchMode(true);
         isEraser = false;
-        colour = Color.RED;
+        colour = Color.BLUE;
         paint = new Paint();
         paint.setColor(colour);
-        paint.setStrokeWidth(30);
+        paint.setStrokeWidth(25);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
@@ -59,12 +60,10 @@ public class DrawView extends View implements View.OnTouchListener {
     }
 
     private void drawPath(MotionEvent event) {
-        this.path.lineTo(event.getX(), event.getY());
-        this.canvas.drawPath(this.path, paint);
-        if (this.paint.getMaskFilter() == this.blurMaskFilter) {
-            this.path.reset();
-            this.path.moveTo(event.getX(), event.getY());
-        }
+        path.lineTo(event.getX(), event.getY());
+        canvas.drawPath(path, paint);
+        path.reset();
+        path.moveTo(event.getX(), event.getY());
     }
 
     @Override
@@ -74,11 +73,11 @@ public class DrawView extends View implements View.OnTouchListener {
                 path.moveTo(event.getX(), event.getY());
                 break;
             case MotionEvent.ACTION_MOVE:
-                this.drawPath(event);
+                drawPath(event);
                 break;
             case MotionEvent.ACTION_UP:
-                this.drawPath(event);
-                this.path.reset();
+                drawPath(event);
+                path.reset();
                 break;
         }
         invalidate();
@@ -96,10 +95,9 @@ public class DrawView extends View implements View.OnTouchListener {
         super.onSizeChanged(w, h, oldw, oldh);
         bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         canvas = new Canvas(bitmap);
-        canvas.drawColor(Color.WHITE);
     }
 
-    float getStrokeWidth(){
+    float getStrokeWidth() {
         return paint.getStrokeWidth();
     }
 
@@ -132,7 +130,7 @@ public class DrawView extends View implements View.OnTouchListener {
 
     void clearCanvas() {
         turnOffEraseMode();
-        canvas.drawColor(Color.WHITE, PorterDuff.Mode.CLEAR);
+        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
     }
 
     void setStrokeWidth(int width) {
@@ -141,7 +139,7 @@ public class DrawView extends View implements View.OnTouchListener {
 
     void setErase() {
         if (!isEraser) {
-            paint.setColor(Color.WHITE);
+            paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
             isEraser = true;
         } else {
             turnOffEraseMode();
@@ -149,7 +147,7 @@ public class DrawView extends View implements View.OnTouchListener {
     }
 
     private void turnOffEraseMode() {
-        paint.setColor(colour);
+        paint.setXfermode(null);
         isEraser = false;
     }
 
