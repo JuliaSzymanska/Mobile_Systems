@@ -18,10 +18,9 @@ public class DrawView extends View implements View.OnTouchListener {
         super(context);
         paint = new Paint();
         paint.setColor(Color.RED);
-//        paint.setMaskFilter(new BlurMaskFilter(15, BlurMaskFilter.Blur.NORMAL));
+        paint.setStyle(Paint.Style.STROKE);
 //        EmbossMaskFilter mEmboss = new EmbossMaskFilter(new float[]{1, 1, 1}, 0.5f, 0.6f, 2f);
 //        paint.setMaskFilter(mEmboss);
-
         this.setOnTouchListener(this);
         setFocusable(true);
         setFocusableInTouchMode(true);

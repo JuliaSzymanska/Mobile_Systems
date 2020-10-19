@@ -1,8 +1,6 @@
 package com.game.paint;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.graphics.BlurMaskFilter;
 import android.os.Bundle;
 import android.view.View;
@@ -15,9 +13,9 @@ public class DrawActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        drawView = new DrawView(this);
-        setContentView(drawView);
+        setContentView(R.layout.activity_draw);
         drawView.requestFocus();
+        drawView = (DrawView) findViewById(R.id.drawView);
     }
 
     public void blurButtonListener(View v) {
