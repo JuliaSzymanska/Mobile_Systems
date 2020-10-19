@@ -9,12 +9,21 @@
         android:layout_height="fill_parent" />
 
     <Button
+        android:id="@+id/normalButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:onClick="normalButtonListener"
+        android:text="@string/normal" />
+
+    <Button
         android:id="@+id/blurButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:onClick="blurButtonListener"
         android:text="@string/blur"
-        android:onClick="blurButtonListener"/>
+        android:translationY="50dp" />
 
     <Button
         android:id="@+id/embossButton"
@@ -23,15 +32,6 @@
         android:layout_marginTop="30dp"
         android:onClick="embossButtonListener"
         android:text="@string/emboss"
-        android:translationY="50dp" />
-
-    <Button
-        android:id="@+id/normalButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:onClick="normalButtonListener"
-        android:text="@string/normal"
         android:translationY="100dp" />
 
     <Button

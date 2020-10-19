@@ -6,9 +6,11 @@ import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.EmbossMaskFilter;
 import android.graphics.MaskFilter;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,40 +18,26 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 public class DrawView extends View implements View.OnTouchListener {
-    Paint paint;
-    Bitmap bitmap;
-    Canvas canvas;
-    Path path;
-    private MaskFilter blur = new BlurMaskFilter(10, BlurMaskFilter.Blur.NORMAL);
-    int colour;
-    boolean isEraser;
+    private Paint paint;
+    private Bitmap bitmap;
+    private Canvas canvas;
+    private Path path;
+    private MaskFilter blurMaskFilter;
+    private int colour;
+    private boolean isEraser;
 
     public DrawView(Context context) {
         super(context);
         init();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public DrawView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public DrawView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public DrawView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
         init();
     }
 
@@ -67,34 +55,16 @@ public class DrawView extends View implements View.OnTouchListener {
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
         path = new Path();
-        setmBlurValue();
-    }
-
-    void setColour(int chosenColour){
-        paint.setColor(chosenColour);
-        colour = chosenColour;
+        setBlurSettings();
     }
 
     private void drawPath(MotionEvent event) {
         this.path.lineTo(event.getX(), event.getY());
         this.canvas.drawPath(this.path, paint);
-        if (this.paint.getMaskFilter() == this.blur) {
+        if (this.paint.getMaskFilter() == this.blurMaskFilter) {
             this.path.reset();
             this.path.moveTo(event.getX(), event.getY());
         }
-    }
-
-    private void setmBlurValue() {
-        boolean setMask = false;
-        if (this.paint.getMaskFilter() == this.blur)
-            setMask = true;
-        int blursize = (int)(paint.getStrokeWidth() / 2);
-        if (blursize <= 0)
-            blursize = 1;
-        blur = new BlurMaskFilter(blursize, BlurMaskFilter.Blur.NORMAL);
-        if (setMask)
-            this.paint.setMaskFilter(blur);
-
     }
 
     @Override
@@ -129,7 +99,59 @@ public class DrawView extends View implements View.OnTouchListener {
         canvas.drawColor(Color.WHITE);
     }
 
+    float getStrokeWidth(){
+        return paint.getStrokeWidth();
+    }
 
+    void setColour(int chosenColour) {
+        turnOffEraseMode();
+        paint.setColor(chosenColour);
+        colour = chosenColour;
+    }
+
+    void setBlurSettings() {
+        int size = (int) (paint.getStrokeWidth() / 2);
+        blurMaskFilter = new BlurMaskFilter((size <= 0) ? 1 : size, BlurMaskFilter.Blur.NORMAL);
+    }
+
+    void setBlur() {
+        turnOffEraseMode();
+        paint.setMaskFilter(blurMaskFilter);
+    }
+
+    void setEmboss() {
+        turnOffEraseMode();
+        EmbossMaskFilter mEmboss = new EmbossMaskFilter(new float[]{1, 1, 1}, 0.5f, 0.6f, 2f);
+        paint.setMaskFilter(mEmboss);
+    }
+
+    void setNormal() {
+        turnOffEraseMode();
+        paint.setMaskFilter(null);
+    }
+
+    void clearCanvas() {
+        turnOffEraseMode();
+        canvas.drawColor(Color.WHITE, PorterDuff.Mode.CLEAR);
+    }
+
+    void setStrokeWidth(int width) {
+        paint.setStrokeWidth(width);
+    }
+
+    void setErase() {
+        if (!isEraser) {
+            paint.setColor(Color.WHITE);
+            isEraser = true;
+        } else {
+            turnOffEraseMode();
+        }
+    }
+
+    private void turnOffEraseMode() {
+        paint.setColor(colour);
+        isEraser = false;
+    }
 
 }
 

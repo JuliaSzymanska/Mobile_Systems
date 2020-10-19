@@ -3,7 +3,6 @@ package com.game.paint;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.graphics.BlurMaskFilter;
 import android.graphics.Color;
 import android.graphics.EmbossMaskFilter;
 import android.graphics.PorterDuff;
@@ -28,29 +27,24 @@ public class DrawActivity extends AppCompatActivity {
         drawView.requestFocus();
     }
 
+    public void normalButtonListener(View v) {
+        drawView.setNormal();
+    }
+
     public void blurButtonListener(View v) {
-        turnOffEraseMode();
-        this.drawView.paint.setMaskFilter(new BlurMaskFilter(15, BlurMaskFilter.Blur.NORMAL));
+        this.drawView.setBlurSettings();
+        this.drawView.setBlur();
     }
 
     public void embossButtonListener(View v) {
-        turnOffEraseMode();
-        EmbossMaskFilter mEmboss = new EmbossMaskFilter(new float[]{1, 1, 1}, 0.5f, 0.6f, 2f);
-        this.drawView.paint.setMaskFilter(mEmboss);
-    }
-
-    public void normalButtonListener(View v) {
-        turnOffEraseMode();
-        this.drawView.paint.setMaskFilter(null);
+        this.drawView.setEmboss();
     }
 
     public void clearButtonListener(View v) {
-        turnOffEraseMode();
-        this.drawView.canvas.drawColor(Color.WHITE, PorterDuff.Mode.CLEAR);
+        this.drawView.clearCanvas();
     }
 
     public void colourButtonListener(View v) {
-        turnOffEraseMode();
         ColorPickerDialogBuilder
                 .with(this)
                 .setTitle("Choose color")
@@ -74,9 +68,9 @@ public class DrawActivity extends AppCompatActivity {
         final NumberPicker numberPicker = dialogView.findViewById(R.id.dialog_number_picker);
         numberPicker.setMaxValue(100);
         numberPicker.setMinValue(1);
-        numberPicker.setValue((int) drawView.paint.getStrokeWidth());
+        numberPicker.setValue((int) drawView.getStrokeWidth());
         numberPicker.setWrapSelectorWheel(false);
-        d.setPositiveButton("Done", (dialogInterface, i) -> drawView.paint.setStrokeWidth(numberPicker.getValue()));
+        d.setPositiveButton("Done", (dialogInterface, i) -> drawView.setStrokeWidth(numberPicker.getValue()));
         d.setNegativeButton("Cancel", (dialogInterface, i) -> {
         });
         AlertDialog alertDialog = d.create();
@@ -84,17 +78,7 @@ public class DrawActivity extends AppCompatActivity {
     }
 
     public void eraseButtonListener(View v) {
-        if (!drawView.isEraser) {
-            drawView.paint.setColor(Color.WHITE);
-            drawView.isEraser = true;
-        } else {
-            turnOffEraseMode();
-        }
-    }
-
-    private void turnOffEraseMode(){
-        drawView.paint.setColor(drawView.colour);
-        drawView.isEraser = false;
+        drawView.setErase();
     }
 
 }
