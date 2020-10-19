@@ -62,7 +62,6 @@ public class DrawView extends View implements View.OnTouchListener {
         colour = Color.RED;
         paint = new Paint();
         paint.setColor(colour);
-        paint.setAntiAlias(true);
         paint.setStrokeWidth(30);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
@@ -127,6 +126,7 @@ public class DrawView extends View implements View.OnTouchListener {
         super.onSizeChanged(w, h, oldw, oldh);
         bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         canvas = new Canvas(bitmap);
+        canvas.drawColor(Color.WHITE);
     }
 
 
