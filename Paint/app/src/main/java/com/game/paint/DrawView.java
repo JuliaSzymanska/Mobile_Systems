@@ -10,7 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 public class DrawView extends View implements View.OnTouchListener {
-    private final Paint paint;
+    public final Paint paint;
     private Bitmap bitmap;
     private Canvas canvas;
 
@@ -18,6 +18,10 @@ public class DrawView extends View implements View.OnTouchListener {
         super(context);
         paint = new Paint();
         paint.setColor(Color.RED);
+//        paint.setMaskFilter(new BlurMaskFilter(15, BlurMaskFilter.Blur.NORMAL));
+//        EmbossMaskFilter mEmboss = new EmbossMaskFilter(new float[]{1, 1, 1}, 0.5f, 0.6f, 2f);
+//        paint.setMaskFilter(mEmboss);
+
         this.setOnTouchListener(this);
         setFocusable(true);
         setFocusableInTouchMode(true);
@@ -42,4 +46,5 @@ public class DrawView extends View implements View.OnTouchListener {
         bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         canvas = new Canvas(bitmap);
     }
+
 }
