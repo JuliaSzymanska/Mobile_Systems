@@ -3,20 +3,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-<!--    <Button-->
-<!--        android:id="@+id/blurButton"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="30dp"-->
-<!--        android:text="@string/blur"-->
-<!--        android:onClick="blurButtonListener"/>-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
     <com.game.paint.DrawView
         android:id="@+id/drawView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
+
+    <Button
+        android:id="@+id/blurButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/blur"
+        android:onClick="blurButtonListener"/>
+
+    <Button
+        android:id="@+id/embossButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:onClick="embossButtonListener"
+        android:text="@string/emboss"
+        android:translationY="50dp" />
+
+    <Button
+        android:id="@+id/normalButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:onClick="normalButtonListener"
+        android:text="@string/normal"
+        android:translationY="100dp" />
+
+    <Button
+        android:id="@+id/clearButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:onClick="clearButtonListener"
+        android:text="@string/clear"
+        android:translationY="100dp" />
 
 </FrameLayout>
