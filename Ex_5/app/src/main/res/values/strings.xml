@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">YouTube player</string>
+    <string name="app_name">YouTube Player</string>
+    <string name="play_video">Play Video</string>
 </resources>
