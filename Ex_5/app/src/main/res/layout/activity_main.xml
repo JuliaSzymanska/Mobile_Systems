@@ -10,19 +10,38 @@
         android:id="@+id/playButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="150dp"
-        android:layout_marginBottom="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:onClick="playButtonListener"
         android:text="@string/play_video" />
 
     <com.google.android.youtube.player.YouTubePlayerView
         android:id="@+id/youtube_view"
-        android:layout_above="@id/playButton"
         android:layout_width="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
+    <Button
+        android:id="@+id/pauseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/playButton"
+        android:layout_marginTop="30dp"
+        android:onClick="pauseButtonListener"
+        android:text="@string/pause" />
+
+    <Button
+        android:id="@+id/stopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/pauseButton"
+        android:layout_marginTop="30dp"
+        android:onClick="stopButtonListener"
+        android:text="@string/pause" />
 
     <!--        android:layout_width="match_parent"-->
     <!--        android:layout_height="wrap_content"-->
