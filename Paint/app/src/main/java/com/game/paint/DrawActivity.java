@@ -3,8 +3,6 @@ package com.game.paint;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Color;
 import android.graphics.EmbossMaskFilter;
@@ -12,7 +10,6 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.NumberPicker;
 
 import com.flask.colorpicker.ColorPickerView;
@@ -32,30 +29,35 @@ public class DrawActivity extends AppCompatActivity {
     }
 
     public void blurButtonListener(View v) {
+        turnOffEraseMode();
         this.drawView.paint.setMaskFilter(new BlurMaskFilter(15, BlurMaskFilter.Blur.NORMAL));
     }
 
     public void embossButtonListener(View v) {
+        turnOffEraseMode();
         EmbossMaskFilter mEmboss = new EmbossMaskFilter(new float[]{1, 1, 1}, 0.5f, 0.6f, 2f);
         this.drawView.paint.setMaskFilter(mEmboss);
     }
 
     public void normalButtonListener(View v) {
+        turnOffEraseMode();
         this.drawView.paint.setMaskFilter(null);
     }
 
     public void clearButtonListener(View v) {
+        turnOffEraseMode();
         this.drawView.canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
     }
 
     public void colourButtonListener(View v) {
+        turnOffEraseMode();
         ColorPickerDialogBuilder
                 .with(this)
                 .setTitle("Choose color")
                 .initialColor(Color.RED)
                 .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
                 .density(12)
-                .setPositiveButton("ok", (dialog, selectedColor, allColors) -> drawView.paint.setColor(selectedColor))
+                .setPositiveButton("ok", (dialog, selectedColor, allColors) -> drawView.setColour(selectedColor))
                 .setNegativeButton("cancel", (dialog, which) -> {
                 })
                 .build()
@@ -79,6 +81,20 @@ public class DrawActivity extends AppCompatActivity {
         });
         AlertDialog alertDialog = d.create();
         alertDialog.show();
+    }
+
+    public void eraseButtonListener(View v) {
+        if (!drawView.isEraser) {
+            drawView.paint.setColor(Color.WHITE);
+            drawView.isEraser = true;
+        } else {
+            turnOffEraseMode();
+        }
+    }
+
+    private void turnOffEraseMode(){
+        drawView.paint.setColor(drawView.colour);
+        drawView.isEraser = false;
     }
 
 }

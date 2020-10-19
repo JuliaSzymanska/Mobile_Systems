@@ -21,6 +21,8 @@ public class DrawView extends View implements View.OnTouchListener {
     Canvas canvas;
     Path path;
     private MaskFilter blur = new BlurMaskFilter(10, BlurMaskFilter.Blur.NORMAL);
+    int colour;
+    boolean isEraser;
 
     public DrawView(Context context) {
         super(context);
@@ -56,8 +58,10 @@ public class DrawView extends View implements View.OnTouchListener {
         this.setOnTouchListener(this);
         setFocusable(true);
         setFocusableInTouchMode(true);
+        isEraser = false;
+        colour = Color.RED;
         paint = new Paint();
-        paint.setColor(Color.RED);
+        paint.setColor(colour);
         paint.setAntiAlias(true);
         paint.setStrokeWidth(30);
         paint.setStyle(Paint.Style.STROKE);
@@ -67,10 +71,12 @@ public class DrawView extends View implements View.OnTouchListener {
         setmBlurValue();
     }
 
+    void setColour(int chosenColour){
+        paint.setColor(chosenColour);
+        colour = chosenColour;
+    }
+
     private void drawPath(MotionEvent event) {
-//        this.path.lineTo(event.getX(), event.getY());
-////        path.moveTo(event.getX(), event.getY());
-//        this.canvas.drawPath(this.path, paint);
         this.path.lineTo(event.getX(), event.getY());
         this.canvas.drawPath(this.path, paint);
         if (this.paint.getMaskFilter() == this.blur) {
@@ -122,6 +128,8 @@ public class DrawView extends View implements View.OnTouchListener {
         bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         canvas = new Canvas(bitmap);
     }
+
+
 
 }
 

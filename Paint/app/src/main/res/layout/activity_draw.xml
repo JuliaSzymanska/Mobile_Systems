@@ -61,4 +61,13 @@
         android:text="@string/size"
         android:translationY="250dp" />
 
+    <Button
+        android:id="@+id/eraseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:onClick="eraseButtonListener"
+        android:text="@string/erase"
+        android:translationY="300dp" />
+
 </FrameLayout>
