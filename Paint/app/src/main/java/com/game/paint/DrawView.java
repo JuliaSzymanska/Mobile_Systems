@@ -20,7 +20,7 @@ public class DrawView extends View implements View.OnTouchListener {
     Bitmap bitmap;
     Canvas canvas;
     Path path;
-    MaskFilter blur = new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL);
+    private MaskFilter blur = new BlurMaskFilter(10, BlurMaskFilter.Blur.NORMAL);
 
     public DrawView(Context context) {
         super(context);
@@ -59,32 +59,52 @@ public class DrawView extends View implements View.OnTouchListener {
         paint = new Paint();
         paint.setColor(Color.RED);
         paint.setAntiAlias(true);
-        paint.setStrokeWidth(10);
+        paint.setStrokeWidth(30);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
         path = new Path();
+        setmBlurValue();
+    }
+
+    private void drawPath(MotionEvent event) {
+//        this.path.lineTo(event.getX(), event.getY());
+////        path.moveTo(event.getX(), event.getY());
+//        this.canvas.drawPath(this.path, paint);
+        this.path.lineTo(event.getX(), event.getY());
+        this.canvas.drawPath(this.path, paint);
+        if (this.paint.getMaskFilter() == this.blur) {
+            this.path.reset();
+            this.path.moveTo(event.getX(), event.getY());
+        }
+    }
+
+    private void setmBlurValue() {
+        boolean setMask = false;
+        if (this.paint.getMaskFilter() == this.blur)
+            setMask = true;
+        int blursize = (int)(paint.getStrokeWidth() / 2);
+        if (blursize <= 0)
+            blursize = 1;
+        blur = new BlurMaskFilter(blursize, BlurMaskFilter.Blur.NORMAL);
+        if (setMask)
+            this.paint.setMaskFilter(blur);
+
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        float pointX = event.getX();
-        float pointY = event.getY();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                path.moveTo(pointX, pointY);
-                return true;
+                path.moveTo(event.getX(), event.getY());
+                break;
             case MotionEvent.ACTION_MOVE:
-                this.path.lineTo(event.getX(), event.getY());
-                this.canvas.drawPath(this.path, paint);
+                this.drawPath(event);
                 break;
             case MotionEvent.ACTION_UP:
-                this.path.lineTo(event.getX(), event.getY());
-                this.canvas.drawPath(this.path, paint);
+                this.drawPath(event);
                 this.path.reset();
                 break;
-            default:
-                return false;
         }
         invalidate();
         return true;
@@ -94,7 +114,6 @@ public class DrawView extends View implements View.OnTouchListener {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawBitmap(bitmap, 0, 0, null);
-//        canvas.drawPath(path, paint);
     }
 
     @Override
@@ -105,3 +124,6 @@ public class DrawView extends View implements View.OnTouchListener {
     }
 
 }
+
+
+

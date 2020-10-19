@@ -43,4 +43,22 @@
         android:text="@string/clear"
         android:translationY="150dp" />
 
+    <Button
+        android:id="@+id/colourButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:onClick="colourButtonListener"
+        android:text="@string/colour"
+        android:translationY="200dp" />
+
+    <Button
+        android:id="@+id/sizeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:onClick="sizeButtonListener"
+        android:text="@string/size"
+        android:translationY="250dp" />
+
 </FrameLayout>

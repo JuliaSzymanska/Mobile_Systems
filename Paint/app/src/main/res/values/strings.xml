@@ -4,4 +4,6 @@
     <string name="emboss">Emboss</string>
     <string name="normal">Normal</string>
     <string name="clear">Clear</string>
+    <string name="colour">Colour</string>
+    <string name="size">Size</string>
 </resources>
