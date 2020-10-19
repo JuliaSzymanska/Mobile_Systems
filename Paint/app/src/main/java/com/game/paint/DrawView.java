@@ -9,8 +9,6 @@ import android.graphics.Color;
 import android.graphics.MaskFilter;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -72,27 +70,31 @@ public class DrawView extends View implements View.OnTouchListener {
     public boolean onTouch(View v, MotionEvent event) {
         float pointX = event.getX();
         float pointY = event.getY();
-        // Checks for the event that occurs
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 path.moveTo(pointX, pointY);
                 return true;
             case MotionEvent.ACTION_MOVE:
-                path.lineTo(pointX, pointY);
+                this.path.lineTo(event.getX(), event.getY());
+                this.canvas.drawPath(this.path, paint);
+                break;
+            case MotionEvent.ACTION_UP:
+                this.path.lineTo(event.getX(), event.getY());
+                this.canvas.drawPath(this.path, paint);
+                this.path.reset();
                 break;
             default:
                 return false;
         }
-        // Force a view to draw again
-        postInvalidate();
+        invalidate();
         return true;
     }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onDraw(Canvas canvas) {
-//        canvas.drawBitmap(bitmap, 0, 0, null);
-        canvas.drawPath(path, paint);
+        canvas.drawBitmap(bitmap, 0, 0, null);
+//        canvas.drawPath(path, paint);
     }
 
     @Override

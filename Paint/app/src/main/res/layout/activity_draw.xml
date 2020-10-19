@@ -41,6 +41,6 @@
         android:layout_marginTop="30dp"
         android:onClick="clearButtonListener"
         android:text="@string/clear"
-        android:translationY="100dp" />
+        android:translationY="150dp" />
 
 </FrameLayout>

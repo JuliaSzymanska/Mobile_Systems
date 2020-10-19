@@ -38,7 +38,7 @@ public class DrawActivity extends AppCompatActivity {
 
     public void clearButtonListener(View v) {
 //        this.drawView.paint.setMaskFilter(null);
-//        this.drawView.canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+        this.drawView.canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
     }
 
 }
