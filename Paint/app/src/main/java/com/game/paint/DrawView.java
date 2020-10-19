@@ -62,8 +62,10 @@ public class DrawView extends View implements View.OnTouchListener {
     private void drawPath(MotionEvent event) {
         path.lineTo(event.getX(), event.getY());
         canvas.drawPath(path, paint);
-        path.reset();
-        path.moveTo(event.getX(), event.getY());
+        if (paint.getMaskFilter() == blurMaskFilter) {
+            path.reset();
+            path.moveTo(event.getX(), event.getY());
+        }
     }
 
     @Override
@@ -108,8 +110,7 @@ public class DrawView extends View implements View.OnTouchListener {
     }
 
     void setBlurSettings() {
-        int size = (int) (paint.getStrokeWidth() / 2);
-        blurMaskFilter = new BlurMaskFilter((size <= 0) ? 1 : size, BlurMaskFilter.Blur.NORMAL);
+        blurMaskFilter = new BlurMaskFilter(paint.getStrokeWidth(), BlurMaskFilter.Blur.NORMAL);
     }
 
     void setBlur() {
