@@ -26,11 +26,12 @@ public class MainActivity extends Activity implements SensorEventListener {
         setContentView(R.layout.activity_main);
         numberOfCubes = 1;
         imageViews = new ArrayList<>();
-        imageViews.add((ImageView) findViewById(R.id.first_cube));
-        imageViews.add((ImageView) findViewById(R.id.second_cube));
-        imageViews.add((ImageView) findViewById(R.id.third_cube));
+        imageViews.add(findViewById(R.id.first_cube));
+        imageViews.add(findViewById(R.id.second_cube));
+        imageViews.add(findViewById(R.id.third_cube));
         mSensorManager =
                 (SensorManager) getSystemService(SENSOR_SERVICE);
+        assert mSensorManager != null;
         mAccelerometer =
                 mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }

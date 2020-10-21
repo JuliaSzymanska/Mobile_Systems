@@ -11,12 +11,34 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginTop="50dp"
-        android:contentDescription=""
+        android:contentDescription="@string/todo"
         android:padding="30dp"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/third_cube"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="50dp"
+        android:contentDescription="@string/todo"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/two"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/second_cube"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/third_cube"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/first_cube"
+        android:contentDescription="@string/todo" />
 
     <Button
         android:id="@+id/one"
@@ -53,27 +75,5 @@
         app:layout_constraintEnd_toStartOf="@+id/three"
         app:layout_constraintStart_toEndOf="@+id/one"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/third_cube"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="50dp"
-        android:contentDescription=""
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/two"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/second_cube"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/third_cube"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/first_cube"
-        android:contentDescription="" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
