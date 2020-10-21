@@ -22,7 +22,6 @@ public class MainActivity extends YouTubeBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         youTubePlayerView = findViewById(R.id.youtube_view);
         selectedFilms = new String[][]{new String[]{"s0-f5RncxcA", "n_1XpKHWMU0", "UWLr2va3hu0"},
                 new String[]{"Take you dancing", "Hey DJ", "Hey Ma"}};
