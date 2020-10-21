@@ -1,7 +1,6 @@
 package tech.szymanskazdrzalik.youtubeplayer;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -25,7 +24,8 @@ public class MainActivity extends YouTubeBaseActivity {
         setContentView(R.layout.activity_main);
 
         youTubePlayerView = findViewById(R.id.youtube_view);
-        selectedFilms = new String[][]{new String[]{"s0-f5RncxcA", "n_1XpKHWMU0", "UWLr2va3hu0"}, new String[]{"Take you dancing", "Hey DJ", "Hey Ma"}};
+        selectedFilms = new String[][]{new String[]{"s0-f5RncxcA", "n_1XpKHWMU0", "UWLr2va3hu0"},
+                new String[]{"Take you dancing", "Hey DJ", "Hey Ma"}};
         selected = 0;
     }
 
@@ -37,12 +37,13 @@ public class MainActivity extends YouTubeBaseActivity {
                 player = youTubePlayer;
                 wasReleased = false;
             } catch (Exception e) {
-                e.printStackTrace();
+                Toast.makeText(MainActivity.this, "Error while loading a video", Toast.LENGTH_SHORT).show();
             }
         }
 
         @Override
         public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+            Toast.makeText(MainActivity.this, "Error on initialization", Toast.LENGTH_SHORT).show();
         }
 
     };
@@ -52,13 +53,10 @@ public class MainActivity extends YouTubeBaseActivity {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
             alertDialog.setTitle("AlertDialog");
             int checkedItem = 1;
-            alertDialog.setSingleChoiceItems(selectedFilms[1], checkedItem, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    selected = which;
-                    youTubePlayerView.initialize("", onInitializedListener);
-                    dialog.dismiss();
-                }
+            alertDialog.setSingleChoiceItems(selectedFilms[1], checkedItem, (dialog, which) -> {
+                selected = which;
+                youTubePlayerView.initialize("", onInitializedListener);
+                dialog.dismiss();
             });
             AlertDialog alert = alertDialog.create();
             alert.setCanceledOnTouchOutside(false);
@@ -69,11 +67,15 @@ public class MainActivity extends YouTubeBaseActivity {
     }
 
     public void pauseButtonListener(View v) {
-        player.pause();
+        if(player != null) {
+            player.pause();
+        }
     }
 
     public void stopButtonListener(View v) {
-        player.release();
-        wasReleased = true;
+        if(player != null) {
+            player.release();
+            wasReleased = true;
+        }
     }
 }
