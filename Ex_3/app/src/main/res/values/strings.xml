@@ -26,4 +26,5 @@
     <string name="root">"The quadratic equation has one root equals "</string>
     <string name="first_root">"The quadratic equation has two roots. First equals "</string>
     <string name="second_root">" , second equals "</string>
+    <string name="todo">TODO</string>
 </resources>

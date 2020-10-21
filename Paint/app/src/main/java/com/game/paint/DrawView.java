@@ -2,6 +2,7 @@ package com.game.paint;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
@@ -24,7 +25,6 @@ public class DrawView extends View implements View.OnTouchListener {
     private Canvas canvas;
     private Path path;
     private MaskFilter blurMaskFilter;
-    private int colour;
     private boolean isEraser;
 
     public DrawView(Context context) {
@@ -47,10 +47,13 @@ public class DrawView extends View implements View.OnTouchListener {
         this.setOnTouchListener(this);
         setFocusable(true);
         setFocusableInTouchMode(true);
+        bitmap = Bitmap.createBitmap(Resources.getSystem().getDisplayMetrics().widthPixels,
+                Resources.getSystem().getDisplayMetrics().heightPixels,
+                Bitmap.Config.ARGB_8888);
+        canvas = new Canvas(bitmap);
         isEraser = false;
-        colour = Color.BLUE;
         paint = new Paint();
-        paint.setColor(colour);
+        paint.setColor(Color.BLUE);
         paint.setStrokeWidth(25);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
@@ -59,13 +62,17 @@ public class DrawView extends View implements View.OnTouchListener {
         setBlurSettings();
     }
 
-    private void drawPath(MotionEvent event) {
+    private void draw(MotionEvent event) {
         path.lineTo(event.getX(), event.getY());
         canvas.drawPath(path, paint);
         if (paint.getMaskFilter() == blurMaskFilter) {
-            path.reset();
-            path.moveTo(event.getX(), event.getY());
+            drawInBlurMode(event);
         }
+    }
+
+    private void drawInBlurMode(MotionEvent event){
+        path.reset();
+        path.moveTo(event.getX(), event.getY());
     }
 
     @Override
@@ -75,10 +82,10 @@ public class DrawView extends View implements View.OnTouchListener {
                 path.moveTo(event.getX(), event.getY());
                 break;
             case MotionEvent.ACTION_MOVE:
-                drawPath(event);
+                draw(event);
                 break;
             case MotionEvent.ACTION_UP:
-                drawPath(event);
+                draw(event);
                 path.reset();
                 break;
         }
@@ -92,13 +99,6 @@ public class DrawView extends View implements View.OnTouchListener {
         canvas.drawBitmap(bitmap, 0, 0, null);
     }
 
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        canvas = new Canvas(bitmap);
-    }
-
     float getStrokeWidth() {
         return paint.getStrokeWidth();
     }
@@ -106,7 +106,6 @@ public class DrawView extends View implements View.OnTouchListener {
     void setColour(int chosenColour) {
         turnOffEraseMode();
         paint.setColor(chosenColour);
-        colour = chosenColour;
     }
 
     void setBlurSettings() {

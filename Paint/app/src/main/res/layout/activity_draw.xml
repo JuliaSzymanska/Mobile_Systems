@@ -14,6 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:onClick="normalButtonListener"
+        android:backgroundTint="#D5D5D5"
+        android:textColor="#504F4F"
         android:text="@string/normal" />
 
     <Button
@@ -22,6 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:onClick="blurButtonListener"
+        android:backgroundTint="#D5D5D5"
+        android:textColor="#504F4F"
         android:text="@string/blur"
         android:translationY="50dp" />
 
@@ -31,6 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:onClick="embossButtonListener"
+        android:backgroundTint="#D5D5D5"
+        android:textColor="#504F4F"
         android:text="@string/emboss"
         android:translationY="100dp" />
 
@@ -40,6 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:onClick="clearButtonListener"
+        android:backgroundTint="#D5D5D5"
+        android:textColor="#504F4F"
         android:text="@string/clear"
         android:translationY="150dp" />
 
@@ -49,6 +57,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:onClick="colourButtonListener"
+        android:backgroundTint="#D5D5D5"
+        android:textColor="#504F4F"
         android:text="@string/colour"
         android:translationY="200dp" />
 
@@ -58,6 +68,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:onClick="sizeButtonListener"
+        android:backgroundTint="#D5D5D5"
+        android:textColor="#504F4F"
         android:text="@string/size"
         android:translationY="250dp" />
 
@@ -67,6 +79,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:onClick="eraseButtonListener"
+        android:backgroundTint="#D5D5D5"
+        android:textColor="#504F4F"
         android:text="@string/erase"
         android:translationY="300dp" />
 

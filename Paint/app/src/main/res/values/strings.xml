@@ -7,4 +7,6 @@
     <string name="colour">Colour</string>
     <string name="size">Size</string>
     <string name="erase">Erase</string>
+    <string name="start">Start</string>
+    <string name="paint_app"> PAINT APP </string>
 </resources>
