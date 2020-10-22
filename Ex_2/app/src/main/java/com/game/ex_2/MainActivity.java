@@ -17,16 +17,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void secondActivityBtnListener(View v) {
-        Intent startIntend = new Intent(getApplicationContext(), SecondActivity.class);
-        startActivity(startIntend);
+        Intent secondActivityIntend = new Intent(this, SecondActivity.class);
+        startActivity(secondActivityIntend);
     }
 
     public void googleBtnListener(View v) {
-        String google = "http://www.google.com";
-        Uri webadress = Uri.parse(google);
-        Intent gotoGoogle = new Intent(Intent.ACTION_VIEW, webadress);
-        if (gotoGoogle.resolveActivity(getPackageManager()) != null) {
-            startActivity(gotoGoogle);
+        Uri webadress = Uri.parse("http://www.google.com");
+        Intent googleIntent = new Intent(Intent.ACTION_VIEW, webadress);
+        if (googleIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(googleIntent);
         }
     }
 

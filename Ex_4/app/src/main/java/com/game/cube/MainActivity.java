@@ -31,9 +31,10 @@ public class MainActivity extends Activity implements SensorEventListener {
         imageViews.add(findViewById(R.id.third_cube));
         mSensorManager =
                 (SensorManager) getSystemService(SENSOR_SERVICE);
-        assert mSensorManager != null;
-        mAccelerometer =
-                mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        if (mSensorManager != null) {
+            mAccelerometer =
+                    mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        }
     }
 
     private void generateRandomNumber() {
@@ -104,7 +105,6 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 
     public void oneButtonListener(View v) {

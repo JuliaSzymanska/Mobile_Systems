@@ -46,11 +46,11 @@ public class DrawActivity extends AppCompatActivity {
         ColorPickerDialogBuilder
                 .with(this)
                 .setTitle("Choose color")
-                .initialColor(Color.RED)
+                .initialColor(Color.BLUE)
                 .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
-                .density(12)
-                .setPositiveButton("ok", (dialog, selectedColor, allColors) -> drawView.setColour(selectedColor))
-                .setNegativeButton("cancel", (dialog, which) -> {
+                .density(18)
+                .setPositiveButton(R.string.ok, (dialog, selectedColor, allColors) -> drawView.setColour(selectedColor))
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {
                 })
                 .build()
                 .show();
@@ -61,15 +61,14 @@ public class DrawActivity extends AppCompatActivity {
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.number_picker_dialog, null);
         d.setTitle("Select size");
-        d.setMessage("Message");
         d.setView(dialogView);
         final NumberPicker numberPicker = dialogView.findViewById(R.id.dialog_number_picker);
         numberPicker.setMaxValue(100);
         numberPicker.setMinValue(1);
         numberPicker.setValue((int) drawView.getStrokeWidth());
         numberPicker.setWrapSelectorWheel(false);
-        d.setPositiveButton("Done", (dialogInterface, i) -> drawView.setStrokeWidth(numberPicker.getValue()));
-        d.setNegativeButton("Cancel", (dialogInterface, i) -> {
+        d.setPositiveButton(R.string.ok, (dialogInterface, i) -> drawView.setStrokeWidth(numberPicker.getValue()));
+        d.setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
         });
         AlertDialog alertDialog = d.create();
         alertDialog.show();

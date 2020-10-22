@@ -9,4 +9,6 @@
     <string name="erase">Erase</string>
     <string name="start">Start</string>
     <string name="paint_app"> PAINT APP </string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 </resources>

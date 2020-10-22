@@ -54,7 +54,7 @@ public class DrawView extends View implements View.OnTouchListener {
         isEraser = false;
         paint = new Paint();
         paint.setColor(Color.BLUE);
-        paint.setStrokeWidth(25);
+        paint.setStrokeWidth(50);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
@@ -119,7 +119,7 @@ public class DrawView extends View implements View.OnTouchListener {
 
     void setEmboss() {
         turnOffEraseMode();
-        EmbossMaskFilter mEmboss = new EmbossMaskFilter(new float[]{1, 1, 1}, 0.5f, 0.6f, 2f);
+        EmbossMaskFilter mEmboss = new EmbossMaskFilter(new float[] { 1f, 1f, 1f }, 0.4f, 0.5f, 0.1f);
         paint.setMaskFilter(mEmboss);
     }
 
