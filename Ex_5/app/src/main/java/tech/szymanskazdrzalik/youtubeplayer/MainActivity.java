@@ -22,6 +22,10 @@ public class MainActivity extends YouTubeBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        init();
+    }
+
+    private void init(){
         youTubePlayerView = findViewById(R.id.youtube_view);
         selectedFilms = new String[][]{new String[]{"s0-f5RncxcA", "n_1XpKHWMU0", "UWLr2va3hu0"},
                 new String[]{"Take you dancing", "Hey DJ", "Hey Ma"}};
@@ -49,20 +53,24 @@ public class MainActivity extends YouTubeBaseActivity {
 
     public void playButtonListener(View v) {
         if (wasReleased) {
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-            alertDialog.setTitle("AlertDialog");
-            int checkedItem = 1;
-            alertDialog.setSingleChoiceItems(selectedFilms[1], checkedItem, (dialog, which) -> {
-                selected = which;
-                youTubePlayerView.initialize("", onInitializedListener);
-                dialog.dismiss();
-            });
-            AlertDialog alert = alertDialog.create();
-            alert.setCanceledOnTouchOutside(false);
-            alert.show();
+            showAlterDialog();
         } else {
             player.play();
         }
+    }
+
+    public void showAlterDialog(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        alertDialog.setTitle("AlertDialog");
+        int checkedItem = 1;
+        alertDialog.setSingleChoiceItems(selectedFilms[1], checkedItem, (dialog, which) -> {
+            selected = which;
+            youTubePlayerView.initialize("", onInitializedListener);
+            dialog.dismiss();
+        });
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(false);
+        alert.show();
     }
 
     public void pauseButtonListener(View v) {

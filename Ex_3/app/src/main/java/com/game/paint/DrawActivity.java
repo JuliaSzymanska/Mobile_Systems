@@ -1,10 +1,15 @@
 package com.game.paint;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.NumberPicker;
@@ -12,10 +17,15 @@ import android.widget.NumberPicker;
 import com.flask.colorpicker.ColorPickerView;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 
+import java.io.IOException;
+import java.util.Objects;
+
 
 public class DrawActivity extends AppCompatActivity {
 
     private DrawView drawView;
+    private static final int IMAGE_PICK_CODE = 1000;
+    private static final int PERMISSION_CODE = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +40,6 @@ public class DrawActivity extends AppCompatActivity {
     }
 
     public void blurButtonListener(View v) {
-        this.drawView.setBlurSettings();
         this.drawView.setBlur();
     }
 
@@ -76,6 +85,27 @@ public class DrawActivity extends AppCompatActivity {
 
     public void eraseButtonListener(View v) {
         drawView.setErase();
+    }
+
+    public void importButtonListener(View v) {
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult(photoPickerIntent, IMAGE_PICK_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE) {
+            Uri selected = Objects.requireNonNull(data).getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selected);
+                drawView.importImage(bitmap);
+            } catch (IOException e) {
+                // TODO: 04.11.2020
+                e.printStackTrace();
+            }
+        }
     }
 
 }

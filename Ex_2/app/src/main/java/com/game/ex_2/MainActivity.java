@@ -30,10 +30,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void mapBtnListener(View v) {
-        Uri location = Uri.parse("geo:37.422219,-122.08364?z=14");
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
-        if (mapIntent.resolveActivity(getPackageManager()) != null) {
-            startActivity(mapIntent);
+//        Uri location = Uri.parse("geo:37.422219,-122.08364?z=14");
+//        Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+//        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+//            startActivity(mapIntent);
+//        }
+        Uri data = Uri.parse("mailto:"
+                + "xyz@gmail.com"
+                + "?subject=" + "Systemy Mobilne" + "&body=" + "Odpowiedź z przedmiotu Systemy Mobilne");
+        Intent intent = new Intent(Intent.ACTION_VIEW, data);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
         }
     }
 

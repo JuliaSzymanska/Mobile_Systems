@@ -84,4 +84,15 @@
         android:text="@string/erase"
         android:translationY="300dp" />
 
+    <Button
+        android:id="@+id/importButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:onClick="importButtonListener"
+        android:backgroundTint="#D5D5D5"
+        android:textColor="#504F4F"
+        android:text="Import"
+        android:translationY="300dp" />
+
 </FrameLayout>

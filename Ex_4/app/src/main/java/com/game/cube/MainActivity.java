@@ -24,11 +24,24 @@ public class MainActivity extends Activity implements SensorEventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        init();
+    }
+
+    private void init() {
         numberOfCubes = 1;
+        initImageViews();
+        initSensor();
+        clearImageViews();
+    }
+
+    private void initImageViews() {
         imageViews = new ArrayList<>();
         imageViews.add(findViewById(R.id.first_cube));
         imageViews.add(findViewById(R.id.second_cube));
         imageViews.add(findViewById(R.id.third_cube));
+    }
+
+    private void initSensor() {
         mSensorManager =
                 (SensorManager) getSystemService(SENSOR_SERVICE);
         if (mSensorManager != null) {
@@ -40,34 +53,44 @@ public class MainActivity extends Activity implements SensorEventListener {
     private void generateRandomNumber() {
         Random randomGenerator = new Random();
         int randomNum;
-        for (int i = 0; i < imageViews.size(); i++) {
-            imageViews.get(i).setBackgroundResource(android.R.color.transparent);
-        }
-
+        clearImageViews();
         if (imageViews.size() >= numberOfCubes) {
             for (int i = 0; i < numberOfCubes; i++) {
                 randomNum = randomGenerator.nextInt(6) + 1;
-                switch (randomNum) {
-                    case 1:
-                        imageViews.get(i).setBackgroundResource(R.drawable.one);
-                        break;
-                    case 2:
-                        imageViews.get(i).setBackgroundResource(R.drawable.two);
-                        break;
-                    case 3:
-                        imageViews.get(i).setBackgroundResource(R.drawable.three);
-                        break;
-                    case 4:
-                        imageViews.get(i).setBackgroundResource(R.drawable.four);
-                        break;
-                    case 5:
-                        imageViews.get(i).setBackgroundResource(R.drawable.five);
-                        break;
-                    case 6:
-                        imageViews.get(i).setBackgroundResource(R.drawable.six);
-                        break;
-                }
+                setImageView(randomNum, i);
             }
+        }
+    }
+
+    private void clearImageViews() {
+        for (int i = 0; i < imageViews.size(); i++) {
+            if (i < numberOfCubes)
+                imageViews.get(i).setBackgroundResource(R.drawable.blank);
+            else
+                imageViews.get(i).setBackgroundResource(android.R.color.transparent);
+        }
+    }
+
+    private void setImageView(int randomNum, int i) {
+        switch (randomNum) {
+            case 1:
+                imageViews.get(i).setBackgroundResource(R.drawable.one);
+                break;
+            case 2:
+                imageViews.get(i).setBackgroundResource(R.drawable.two);
+                break;
+            case 3:
+                imageViews.get(i).setBackgroundResource(R.drawable.three);
+                break;
+            case 4:
+                imageViews.get(i).setBackgroundResource(R.drawable.four);
+                break;
+            case 5:
+                imageViews.get(i).setBackgroundResource(R.drawable.five);
+                break;
+            case 6:
+                imageViews.get(i).setBackgroundResource(R.drawable.six);
+                break;
         }
     }
 
@@ -91,15 +114,13 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            float x = event.values[0];
-            float y = event.values[1];
-            float z = event.values[2];
-            float acceleration = (float) Math.sqrt(x * x + y * y + z * z) -
-                    SensorManager.GRAVITY_EARTH;
-            if (acceleration > SHAKE_THRESHOLD) {
-                generateRandomNumber();
-            }
+        float x = event.values[0];
+        float y = event.values[1];
+        float z = event.values[2];
+        float acceleration = (float) Math.sqrt(x * x + y * y + z * z) -
+                SensorManager.GRAVITY_EARTH;
+        if (acceleration > SHAKE_THRESHOLD) {
+            generateRandomNumber();
         }
     }
 
@@ -109,14 +130,17 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     public void oneButtonListener(View v) {
         numberOfCubes = 1;
+        clearImageViews();
     }
 
     public void twoButtonListener(View v) {
         numberOfCubes = 2;
+        clearImageViews();
     }
 
     public void threeButtonListener(View v) {
         numberOfCubes = 3;
+        clearImageViews();
     }
 
 }

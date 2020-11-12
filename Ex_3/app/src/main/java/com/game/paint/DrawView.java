@@ -2,6 +2,7 @@ package com.game.paint;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
@@ -113,6 +114,7 @@ public class DrawView extends View implements View.OnTouchListener {
     }
 
     void setBlur() {
+        setBlurSettings();
         turnOffEraseMode();
         paint.setMaskFilter(blurMaskFilter);
     }
@@ -150,6 +152,13 @@ public class DrawView extends View implements View.OnTouchListener {
         paint.setXfermode(null);
         isEraser = false;
     }
+
+    void importImage(Bitmap bitmap){
+        clearCanvas();
+        this.canvas.drawBitmap(bitmap, 0, 0, null);
+    }
+
+
 
 }
 
