@@ -1,4 +1,4 @@
-package tech.szymanskazdrzalik.youtubeplayer;
+package com.game.youtubeplayer;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
