@@ -16,9 +16,13 @@ import java.util.Random;
 public class MainActivity extends Activity implements SensorEventListener {
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
+    private Sensor mProximity;
     private static final int SHAKE_THRESHOLD = 3;
+    private static final int START_PROXIMITY = 5;
+    private static final int END_PROXIMITY = 6;
     List<ImageView> imageViews;
     private int numberOfCubes;
+    private Boolean isPaused;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +32,8 @@ public class MainActivity extends Activity implements SensorEventListener {
     }
 
     private void init() {
-        numberOfCubes = 1;
+        numberOfCubes = 3;
+        isPaused = false;
         initImageViews();
         initSensor();
         clearImageViews();
@@ -47,6 +52,8 @@ public class MainActivity extends Activity implements SensorEventListener {
         if (mSensorManager != null) {
             mAccelerometer =
                     mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            mProximity =
+                    mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         }
     }
 
@@ -99,6 +106,9 @@ public class MainActivity extends Activity implements SensorEventListener {
         super.onResume();
         mSensorManager.registerListener(this, mAccelerometer,
                 SensorManager.SENSOR_DELAY_UI);
+        mSensorManager.registerListener(this, mProximity,
+                SensorManager.SENSOR_DELAY_UI);
+
     }
 
     protected void onPause() {
@@ -114,13 +124,23 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        float x = event.values[0];
-        float y = event.values[1];
-        float z = event.values[2];
-        float acceleration = (float) Math.sqrt(x * x + y * y + z * z) -
-                SensorManager.GRAVITY_EARTH;
-        if (acceleration > SHAKE_THRESHOLD) {
-            generateRandomNumber();
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            if (!isPaused) {
+                float x = event.values[0];
+                float y = event.values[1];
+                float z = event.values[2];
+                float acceleration = (float) Math.sqrt(x * x + y * y + z * z) -
+                        SensorManager.GRAVITY_EARTH;
+                if (acceleration > SHAKE_THRESHOLD) {
+                    generateRandomNumber();
+                }
+            }
+        } else if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
+            if (event.values[0] < START_PROXIMITY && !isPaused) {
+                isPaused = true;
+            } else if (event.values[0] > END_PROXIMITY && isPaused) {
+                isPaused = false;
+            }
         }
     }
 

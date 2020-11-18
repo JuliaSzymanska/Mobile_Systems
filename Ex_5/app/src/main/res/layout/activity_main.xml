@@ -42,4 +42,24 @@
         android:onClick="stopButtonListener"
         android:text="@string/stop" />
 
+    <Button
+        android:id="@+id/nextVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/stopButton"
+        android:layout_marginTop="30dp"
+        android:onClick="nextButtonListener"
+        android:text="@string/next_video" />
+
+    <Button
+        android:id="@+id/PreviousVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/nextVideo"
+        android:layout_marginTop="30dp"
+        android:onClick="previousButtonListener"
+        android:text="@string/previous_video" />
+
 </RelativeLayout>

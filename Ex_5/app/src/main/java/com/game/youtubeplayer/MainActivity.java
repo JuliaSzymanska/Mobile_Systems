@@ -16,7 +16,7 @@ public class MainActivity extends YouTubeBaseActivity {
     private int selected;
     private YouTubePlayerView youTubePlayerView;
     private YouTubePlayer player;
-    private Boolean wasReleased = true;
+    private Boolean wasReleased;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,23 +25,20 @@ public class MainActivity extends YouTubeBaseActivity {
         init();
     }
 
-    private void init(){
+    private void init() {
         youTubePlayerView = findViewById(R.id.youtube_view);
-        selectedFilms = new String[][]{new String[]{"s0-f5RncxcA", "n_1XpKHWMU0", "UWLr2va3hu0"},
-                new String[]{"Take you dancing", "Hey DJ", "Hey Ma"}};
+        selectedFilms = new String[][]{new String[]{"s0-f5RncxcA", "n_1XpKHWMU0", "UWLr2va3hu0", "k2qgadSvNyU", "Nj2U6rhnucI"},
+                new String[]{"Take you dancing", "Hey DJ", "Hey Ma", "New Rules", "Break My Heart"}};
         selected = 0;
+        wasReleased = true;
     }
 
     private final YouTubePlayer.OnInitializedListener onInitializedListener = new YouTubePlayer.OnInitializedListener() {
         @Override
         public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-            try {
-                youTubePlayer.loadVideo(selectedFilms[0][selected]);
-                player = youTubePlayer;
-                wasReleased = false;
-            } catch (Exception e) {
-                Toast.makeText(MainActivity.this, "Error while loading a video", Toast.LENGTH_SHORT).show();
-            }
+            youTubePlayer.loadVideo(selectedFilms[0][selected]);
+            player = youTubePlayer;
+            wasReleased = false;
         }
 
         @Override
@@ -59,11 +56,10 @@ public class MainActivity extends YouTubeBaseActivity {
         }
     }
 
-    public void showAlterDialog(){
+    public void showAlterDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
         alertDialog.setTitle("AlertDialog");
-        int checkedItem = 1;
-        alertDialog.setSingleChoiceItems(selectedFilms[1], checkedItem, (dialog, which) -> {
+        alertDialog.setSingleChoiceItems(selectedFilms[1], 0, (dialog, which) -> {
             selected = which;
             youTubePlayerView.initialize("", onInitializedListener);
             dialog.dismiss();
@@ -74,15 +70,40 @@ public class MainActivity extends YouTubeBaseActivity {
     }
 
     public void pauseButtonListener(View v) {
-        if(player != null) {
+        if (player != null) {
             player.pause();
         }
     }
 
     public void stopButtonListener(View v) {
-        if(player != null) {
-            player.release();
+        releasePlayer();
+    }
+
+    private void releasePlayer() {
+        if (player != null) {
+            if (!wasReleased) player.release();
             wasReleased = true;
         }
     }
+
+    public void nextButtonListener(View v) {
+        if (selected < selectedFilms[0].length - 1) {
+            selected += 1;
+        } else {
+            selected = 0;
+        }
+        if (!wasReleased) releasePlayer();
+        youTubePlayerView.initialize("AIzaSyClovOxoHq1r2yX6Hn1TCPVGhKpgeYCzwU", onInitializedListener);
+    }
+
+    public void previousButtonListener(View v) {
+        if (selected > 0) {
+            selected -= 1;
+        } else {
+            selected = selectedFilms[0].length - 1;
+        }
+        if (!wasReleased) releasePlayer();
+        youTubePlayerView.initialize("AIzaSyClovOxoHq1r2yX6Hn1TCPVGhKpgeYCzwU", onInitializedListener);
+    }
+
 }
