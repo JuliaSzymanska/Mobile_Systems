@@ -6,4 +6,4 @@ The task is to create a mobile application that calculates  the square discrimin
 
 ## Screenshots <a name = "screenshots"></a>
 
-<img src="https://github.com/JuliaSzymanska/Mobile_Systems/blob/main/.readme/Ex_1.png" alt="Ex_1 screenshot" height="500"/>
+<img src="https://github.com/JuliaSzymanska/Mobile_Systems/blob/main/.readme/Ex_1.png" alt="Ex_1 screenshot" height="700"/>
