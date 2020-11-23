@@ -50,7 +50,7 @@ public class MainActivity extends YouTubeBaseActivity {
 
     public void playButtonListener(View v) {
         if (wasReleased) {
-            showAlterDialog();
+            youTubePlayerView.initialize("AIzaSyClovOxoHq1r2yX6Hn1TCPVGhKpgeYCzwU", onInitializedListener);
         } else {
             player.play();
         }
@@ -61,12 +61,15 @@ public class MainActivity extends YouTubeBaseActivity {
         alertDialog.setTitle("AlertDialog");
         alertDialog.setSingleChoiceItems(selectedFilms[1], 0, (dialog, which) -> {
             selected = which;
-            youTubePlayerView.initialize("AIzaSyClovOxoHq1r2yX6Hn1TCPVGhKpgeYCzwU", onInitializedListener);
             dialog.dismiss();
         });
         AlertDialog alert = alertDialog.create();
         alert.setCanceledOnTouchOutside(false);
         alert.show();
+    }
+
+    public void chooseButtonListener(View v){
+        showAlterDialog();
     }
 
     public void pauseButtonListener(View v) {
