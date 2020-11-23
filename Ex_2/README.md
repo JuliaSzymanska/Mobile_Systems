@@ -1,4 +1,4 @@
-# Ex_2 - Interacting with Other Apps
+# Interacting with Other Apps
 
 ## About <a name = "about"></a>
 

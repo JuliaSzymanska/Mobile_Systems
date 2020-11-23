@@ -1,4 +1,4 @@
-# Ex_1 - Calculation of the square discriminant and roots of the equation
+# Calculation of the square discriminant and roots of the equation
 
 ## About <a name = "about"></a>
 

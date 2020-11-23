@@ -1,4 +1,4 @@
-# Ex_3 - Paint Application
+# Paint Application
 
 ## About <a name = "about"></a>
 

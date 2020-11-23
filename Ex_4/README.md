@@ -1,4 +1,4 @@
-# Ex_4 - Dice shaker
+# Dice shaker
 
 ## About <a name = "about"></a>
 
