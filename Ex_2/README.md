@@ -13,4 +13,4 @@ The task is to create a mobile application that takes user from one activity to 
 
 ## Screenshots <a name = "screenshots"></a>
 
-<img src="https://github.com/JuliaSzymanska/Mobile_Systems/blob/main/.readme/Ex_2.png" alt="Ex_1 screenshot" height="700"/>
+<img src="https://github.com/JuliaSzymanska/Mobile_Systems/blob/main/.readme/Ex_2.png" alt="Ex_2 screenshot" height="700"/>

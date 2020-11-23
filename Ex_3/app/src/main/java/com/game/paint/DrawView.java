@@ -133,15 +133,15 @@ public class DrawView extends View implements View.OnTouchListener {
         blurMaskFilter = new BlurMaskFilter(paint.getStrokeWidth(), BlurMaskFilter.Blur.NORMAL);
     }
 
+    void setNormal() {
+        turnOffEraseMode();
+        paint.setMaskFilter(null);
+    }
+
     void setBlur() {
         setBlurSettings();
         turnOffEraseMode();
         paint.setMaskFilter(blurMaskFilter);
-    }
-
-    void setNormal() {
-        turnOffEraseMode();
-        paint.setMaskFilter(null);
     }
 
     void clearCanvas() {
@@ -155,6 +155,7 @@ public class DrawView extends View implements View.OnTouchListener {
 
     void setErase() {
         if (!isEraser) {
+            paint.setMaskFilter(null);
             paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
             isEraser = true;
         } else {
