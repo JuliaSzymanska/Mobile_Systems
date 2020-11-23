@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 
@@ -106,11 +107,14 @@ public class DrawActivity extends AppCompatActivity {
 
     public void visibleButtonListener(View v) {
         LinearLayout linearLayout = findViewById(R.id.buttonsList);
+        Button button = findViewById(R.id.visibleButton);
         if(linearLayout.getVisibility() == View.VISIBLE){
             linearLayout.setVisibility(View.INVISIBLE);
+            button.setBackgroundResource(R.drawable.invisible);
             return;
         }
         linearLayout.setVisibility(View.VISIBLE);
+        button.setBackgroundResource(R.drawable.visible);
     }
 
     public void saveButtonListener(View v){

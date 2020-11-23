@@ -10,15 +10,16 @@
 
     <LinearLayout
         android:id="@+id/buttonsList"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/normalButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_margin="8dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/paint_brush"
             android:backgroundTint="#D5D5D5"
             android:onClick="normalButtonListener" />
@@ -27,7 +28,8 @@
             android:id="@+id/blurButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_margin="8dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/blur"
             android:backgroundTint="#D5D5D5"
             android:onClick="blurButtonListener" />
@@ -36,7 +38,8 @@
             android:id="@+id/clearButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_margin="8dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/trash"
             android:backgroundTint="#D5D5D5"
             android:onClick="clearButtonListener" />
@@ -45,7 +48,8 @@
             android:id="@+id/colourButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_margin="8dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/color_paint"
             android:backgroundTint="#D5D5D5"
             android:onClick="colourButtonListener" />
@@ -54,16 +58,18 @@
             android:id="@+id/sizeButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_margin="8dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/size"
             android:backgroundTint="#D5D5D5"
-            android:onClick="sizeButtonListener"
-            android:background="@drawable/size"/>
+            android:onClick="sizeButtonListener" />
 
         <Button
             android:id="@+id/canvasColourButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_margin="8dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/canvas_color"
             android:backgroundTint="#D5D5D5"
             android:onClick="canvasColourListener" />
@@ -72,7 +78,8 @@
             android:id="@+id/eraseButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_margin="8dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/eraser"
             android:backgroundTint="#D5D5D5"
             android:onClick="eraseButtonListener" />
@@ -81,30 +88,33 @@
             android:id="@+id/importButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_margin="8dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/import_png"
             android:backgroundTint="#D5D5D5"
-            android:onClick="importButtonListener"
-            android:background="@drawable/import_png" />
+            android:onClick="importButtonListener" />
 
         <Button
             android:id="@+id/saveButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_margin="8dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/save"
             android:backgroundTint="#D5D5D5"
-            android:onClick="saveButtonListener"
-            android:background="@drawable/save" />
+            android:onClick="saveButtonListener" />
 
     </LinearLayout>
 
     <Button
         android:id="@+id/visibleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentBottom="true"
-        android:layout_margin="3dp"
+        android:layout_margin="8dp"
         android:layout_marginTop="10dp"
-        android:onClick="visibleButtonListener"
-        android:text="@string/visible" />
+        android:background="@drawable/visible"
+        android:backgroundTint="#D5D5D5"
+        android:onClick="visibleButtonListener" />
 
 </RelativeLayout>

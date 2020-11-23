@@ -15,10 +15,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,12 +23,8 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Objects;
-import java.util.Random;
 
 public class DrawView extends View implements View.OnTouchListener {
     private Paint paint;
@@ -40,7 +33,6 @@ public class DrawView extends View implements View.OnTouchListener {
     private Path path;
     private MaskFilter blurMaskFilter;
     private boolean isEraser;
-    private int canvasColour;
 
     public DrawView(Context context) {
         super(context);
@@ -62,7 +54,6 @@ public class DrawView extends View implements View.OnTouchListener {
         this.setOnTouchListener(this);
         setFocusable(true);
         setFocusableInTouchMode(true);
-        canvasColour = Color.WHITE;
         bitmap = Bitmap.createBitmap(Resources.getSystem().getDisplayMetrics().widthPixels,
                 Resources.getSystem().getDisplayMetrics().heightPixels,
                 Bitmap.Config.ARGB_8888);
@@ -113,7 +104,6 @@ public class DrawView extends View implements View.OnTouchListener {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawBitmap(bitmap, 0, 0, null);
-        setBackgroundColor(canvasColour);
     }
 
     float getStrokeWidth() {
@@ -126,8 +116,8 @@ public class DrawView extends View implements View.OnTouchListener {
     }
 
     void setCanvasColour(int chosenColour) {
-        canvasColour = chosenColour;
         invalidate();
+        canvas.drawColor(chosenColour);
     }
 
     void setBlurSettings() {
