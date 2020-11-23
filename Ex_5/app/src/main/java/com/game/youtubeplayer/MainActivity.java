@@ -61,7 +61,7 @@ public class MainActivity extends YouTubeBaseActivity {
         alertDialog.setTitle("AlertDialog");
         alertDialog.setSingleChoiceItems(selectedFilms[1], 0, (dialog, which) -> {
             selected = which;
-            youTubePlayerView.initialize("", onInitializedListener);
+            youTubePlayerView.initialize("AIzaSyClovOxoHq1r2yX6Hn1TCPVGhKpgeYCzwU", onInitializedListener);
             dialog.dismiss();
         });
         AlertDialog alert = alertDialog.create();
