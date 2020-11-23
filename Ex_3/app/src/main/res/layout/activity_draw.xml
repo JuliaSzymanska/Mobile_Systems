@@ -35,14 +35,14 @@
             android:onClick="blurButtonListener" />
 
         <Button
-            android:id="@+id/clearButton"
+            android:id="@+id/eraseButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginHorizontal="5dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/trash"
+            android:background="@drawable/eraser"
             android:backgroundTint="#D5D5D5"
-            android:onClick="clearButtonListener" />
+            android:onClick="eraseButtonListener" />
 
         <Button
             android:id="@+id/colourButton"
@@ -74,15 +74,16 @@
             android:backgroundTint="#D5D5D5"
             android:onClick="canvasColourListener" />
 
+
         <Button
-            android:id="@+id/eraseButton"
+            android:id="@+id/clearButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginHorizontal="5dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/eraser"
+            android:background="@drawable/trash"
             android:backgroundTint="#D5D5D5"
-            android:onClick="eraseButtonListener" />
+            android:onClick="clearButtonListener" />
 
         <Button
             android:id="@+id/importButton"

@@ -9,13 +9,15 @@ import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.EmbossMaskFilter;
 import android.graphics.MaskFilter;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,6 +27,11 @@ import androidx.annotation.Nullable;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
 
 public class DrawView extends View implements View.OnTouchListener {
     private Paint paint;
@@ -33,6 +40,7 @@ public class DrawView extends View implements View.OnTouchListener {
     private Path path;
     private MaskFilter blurMaskFilter;
     private boolean isEraser;
+    private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.US);
 
     public DrawView(Context context) {
         super(context);
@@ -58,6 +66,7 @@ public class DrawView extends View implements View.OnTouchListener {
                 Resources.getSystem().getDisplayMetrics().heightPixels,
                 Bitmap.Config.ARGB_8888);
         canvas = new Canvas(bitmap);
+        canvas.drawColor(Color.WHITE);
         isEraser = false;
         paint = new Paint();
         paint.setColor(Color.BLUE);
@@ -137,7 +146,7 @@ public class DrawView extends View implements View.OnTouchListener {
 
     void clearCanvas() {
         turnOffEraseMode();
-        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+        canvas.drawColor(Color.WHITE, PorterDuff.Mode.CLEAR);
     }
 
     void setStrokeWidth(int width) {
@@ -163,18 +172,25 @@ public class DrawView extends View implements View.OnTouchListener {
         this.canvas.drawBitmap(bitmap, 0, 0, null);
     }
 
-    void saveImage() {
-        FileOutputStream fos = null;
-        String path = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            path = String.valueOf(Environment.getExternalStorageDirectory()) +
-                    "/" + java.time.Clock.systemUTC().instant() + ".jpg";
+    void saveImage() throws IOException {
+
+        String fileName = "Paint " + formatter.format(new Date());
+        OutputStream fos;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            ContentResolver resolver = getContext().getContentResolver();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, fileName + ".png");
+            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/png");
+            contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES);
+            Uri imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+            fos = resolver.openOutputStream(Objects.requireNonNull(imageUri));
+        } else {
+            String imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
+            File image = new File(imagesDir, fileName + ".png");
+            fos = new FileOutputStream(image);
         }
-        try {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(new File(path)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        Objects.requireNonNull(fos).close();
     }
 }
 

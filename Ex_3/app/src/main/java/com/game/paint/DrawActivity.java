@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import com.flask.colorpicker.ColorPickerView;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
@@ -118,7 +119,15 @@ public class DrawActivity extends AppCompatActivity {
     }
 
     public void saveButtonListener(View v){
-        drawView.saveImage();
+        System.out.println("Klikniete");
+        try {
+            drawView.saveImage();
+            System.out.println("Klikniete w try");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Save error!", Toast.LENGTH_SHORT).show();
+        }
+        Toast.makeText(getApplicationContext(), "Saved image!", Toast.LENGTH_SHORT).show();
     }
 
 
