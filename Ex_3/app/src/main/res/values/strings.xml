@@ -11,4 +11,8 @@
     <string name="paint_app"> PAINT APP </string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="import_string">Import</string>
+    <string name="visible">VISIBLE</string>
+    <string name="canvas">CANVAS</string>
+    <string name="save_string">SAVE</string>
 </resources>

@@ -1,8 +1,9 @@
 package com.game.paint;
 
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
@@ -14,11 +15,23 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Objects;
+import java.util.Random;
 
 public class DrawView extends View implements View.OnTouchListener {
     private Paint paint;
@@ -27,6 +40,7 @@ public class DrawView extends View implements View.OnTouchListener {
     private Path path;
     private MaskFilter blurMaskFilter;
     private boolean isEraser;
+    private int canvasColour;
 
     public DrawView(Context context) {
         super(context);
@@ -48,6 +62,7 @@ public class DrawView extends View implements View.OnTouchListener {
         this.setOnTouchListener(this);
         setFocusable(true);
         setFocusableInTouchMode(true);
+        canvasColour = Color.WHITE;
         bitmap = Bitmap.createBitmap(Resources.getSystem().getDisplayMetrics().widthPixels,
                 Resources.getSystem().getDisplayMetrics().heightPixels,
                 Bitmap.Config.ARGB_8888);
@@ -55,7 +70,7 @@ public class DrawView extends View implements View.OnTouchListener {
         isEraser = false;
         paint = new Paint();
         paint.setColor(Color.BLUE);
-        paint.setStrokeWidth(50);
+        paint.setStrokeWidth(10);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
@@ -71,7 +86,7 @@ public class DrawView extends View implements View.OnTouchListener {
         }
     }
 
-    private void drawInBlurMode(MotionEvent event){
+    private void drawInBlurMode(MotionEvent event) {
         path.reset();
         path.moveTo(event.getX(), event.getY());
     }
@@ -98,6 +113,7 @@ public class DrawView extends View implements View.OnTouchListener {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawBitmap(bitmap, 0, 0, null);
+        setBackgroundColor(canvasColour);
     }
 
     float getStrokeWidth() {
@@ -109,6 +125,11 @@ public class DrawView extends View implements View.OnTouchListener {
         paint.setColor(chosenColour);
     }
 
+    void setCanvasColour(int chosenColour) {
+        canvasColour = chosenColour;
+        invalidate();
+    }
+
     void setBlurSettings() {
         blurMaskFilter = new BlurMaskFilter(paint.getStrokeWidth(), BlurMaskFilter.Blur.NORMAL);
     }
@@ -117,12 +138,6 @@ public class DrawView extends View implements View.OnTouchListener {
         setBlurSettings();
         turnOffEraseMode();
         paint.setMaskFilter(blurMaskFilter);
-    }
-
-    void setEmboss() {
-        turnOffEraseMode();
-        EmbossMaskFilter mEmboss = new EmbossMaskFilter(new float[] { 1f, 1f, 1f }, 0.4f, 0.5f, 0.1f);
-        paint.setMaskFilter(mEmboss);
     }
 
     void setNormal() {
@@ -153,13 +168,24 @@ public class DrawView extends View implements View.OnTouchListener {
         isEraser = false;
     }
 
-    void importImage(Bitmap bitmap){
+    void importImage(Bitmap bitmap) {
         clearCanvas();
         this.canvas.drawBitmap(bitmap, 0, 0, null);
     }
 
-
-
+    void saveImage() {
+        FileOutputStream fos = null;
+        String path = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            path = String.valueOf(Environment.getExternalStorageDirectory()) +
+                    "/" + java.time.Clock.systemUTC().instant() + ".jpg";
+        }
+        try {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(new File(path)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 

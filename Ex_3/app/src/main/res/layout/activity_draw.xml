@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,91 +8,103 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 
-    <Button
-        android:id="@+id/normalButton"
+    <LinearLayout
+        android:id="@+id/buttonsList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:onClick="normalButtonListener"
-        android:backgroundTint="#D5D5D5"
-        android:textColor="#504F4F"
-        android:text="@string/normal" />
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/normalButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/paint_brush"
+            android:backgroundTint="#D5D5D5"
+            android:onClick="normalButtonListener" />
+
+        <Button
+            android:id="@+id/blurButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/blur"
+            android:backgroundTint="#D5D5D5"
+            android:onClick="blurButtonListener" />
+
+        <Button
+            android:id="@+id/clearButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/trash"
+            android:backgroundTint="#D5D5D5"
+            android:onClick="clearButtonListener" />
+
+        <Button
+            android:id="@+id/colourButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/color_paint"
+            android:backgroundTint="#D5D5D5"
+            android:onClick="colourButtonListener" />
+
+        <Button
+            android:id="@+id/sizeButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="8dp"
+            android:backgroundTint="#D5D5D5"
+            android:onClick="sizeButtonListener"
+            android:background="@drawable/size"/>
+
+        <Button
+            android:id="@+id/canvasColourButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/canvas_color"
+            android:backgroundTint="#D5D5D5"
+            android:onClick="canvasColourListener" />
+
+        <Button
+            android:id="@+id/eraseButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/eraser"
+            android:backgroundTint="#D5D5D5"
+            android:onClick="eraseButtonListener" />
+
+        <Button
+            android:id="@+id/importButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="8dp"
+            android:backgroundTint="#D5D5D5"
+            android:onClick="importButtonListener"
+            android:background="@drawable/import_png" />
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="8dp"
+            android:backgroundTint="#D5D5D5"
+            android:onClick="saveButtonListener"
+            android:background="@drawable/save" />
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/blurButton"
+        android:id="@+id/visibleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:onClick="blurButtonListener"
-        android:backgroundTint="#D5D5D5"
-        android:textColor="#504F4F"
-        android:text="@string/blur"
-        android:translationY="50dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_margin="3dp"
+        android:layout_marginTop="10dp"
+        android:onClick="visibleButtonListener"
+        android:text="@string/visible" />
 
-    <Button
-        android:id="@+id/embossButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:onClick="embossButtonListener"
-        android:backgroundTint="#D5D5D5"
-        android:textColor="#504F4F"
-        android:text="@string/emboss"
-        android:translationY="100dp" />
-
-    <Button
-        android:id="@+id/clearButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:onClick="clearButtonListener"
-        android:backgroundTint="#D5D5D5"
-        android:textColor="#504F4F"
-        android:text="@string/clear"
-        android:translationY="150dp" />
-
-    <Button
-        android:id="@+id/colourButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:onClick="colourButtonListener"
-        android:backgroundTint="#D5D5D5"
-        android:textColor="#504F4F"
-        android:text="@string/colour"
-        android:translationY="200dp" />
-
-    <Button
-        android:id="@+id/sizeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:onClick="sizeButtonListener"
-        android:backgroundTint="#D5D5D5"
-        android:textColor="#504F4F"
-        android:text="@string/size"
-        android:translationY="250dp" />
-
-    <Button
-        android:id="@+id/eraseButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:onClick="eraseButtonListener"
-        android:backgroundTint="#D5D5D5"
-        android:textColor="#504F4F"
-        android:text="@string/erase"
-        android:translationY="300dp" />
-
-    <Button
-        android:id="@+id/importButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:onClick="importButtonListener"
-        android:backgroundTint="#D5D5D5"
-        android:textColor="#504F4F"
-        android:text="Import"
-        android:translationY="300dp" />
-
-</FrameLayout>
+</RelativeLayout>

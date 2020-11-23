@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 
 import com.flask.colorpicker.ColorPickerView;
@@ -41,10 +42,6 @@ public class DrawActivity extends AppCompatActivity {
 
     public void blurButtonListener(View v) {
         this.drawView.setBlur();
-    }
-
-    public void embossButtonListener(View v) {
-        this.drawView.setEmboss();
     }
 
     public void clearButtonListener(View v) {
@@ -83,6 +80,20 @@ public class DrawActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    public void canvasColourListener(View v) {
+        ColorPickerDialogBuilder
+                .with(this)
+                .setTitle("Choose canva's color")
+                .initialColor(Color.WHITE)
+                .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
+                .density(16)
+                .setPositiveButton(R.string.ok, (dialog, selectedColor, allColors) -> drawView.setCanvasColour(selectedColor))
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                })
+                .build()
+                .show();
+    }
+
     public void eraseButtonListener(View v) {
         drawView.setErase();
     }
@@ -92,6 +103,20 @@ public class DrawActivity extends AppCompatActivity {
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, IMAGE_PICK_CODE);
     }
+
+    public void visibleButtonListener(View v) {
+        LinearLayout linearLayout = findViewById(R.id.buttonsList);
+        if(linearLayout.getVisibility() == View.VISIBLE){
+            linearLayout.setVisibility(View.INVISIBLE);
+            return;
+        }
+        linearLayout.setVisibility(View.VISIBLE);
+    }
+
+    public void saveButtonListener(View v){
+        drawView.saveImage();
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
