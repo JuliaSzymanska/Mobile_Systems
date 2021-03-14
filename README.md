@@ -8,3 +8,4 @@ This repository contains five exercies for an university course - Android progra
 2. [Interacting with Other Apps](https://github.com/JuliaSzymanska/Mobile_Systems/tree/main/Ex_2)
 3. [Paint Application](https://github.com/JuliaSzymanska/Mobile_Systems/tree/main/Ex_3)
 4. [Dice shaker](https://github.com/JuliaSzymanska/Mobile_Systems/tree/main/Ex_4)
+5. [Youtube player](https://github.com/JuliaSzymanska/Mobile_Systems/tree/main/Ex_5)
